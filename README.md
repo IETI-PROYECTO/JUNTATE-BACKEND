@@ -19,6 +19,26 @@ Juntate es una aplicación comunitaria diseñada para conectar personas en Bogot
 
 ## Enlace al Documento de Planeación:
 
+## Instrucciones de despliegue
+
+### Instalacion y ejecucion
+
+Para instalar y correr este proyecto de forma local, siga los siguientes pasos:
+
+1. Clonar el repositorio:
+
+```bash
+git clone https://github.com/IETI-PROYECTO/JUNTATE-BACKEND
+cd JUNTATE-BACKEND
+```
+
+2. Build and run:
+
+```bash
+mvn clean install
+mvn spring-boot:run
+```
+
 ## Autores
 
 - Camilo Murcia Espinosa
