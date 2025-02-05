@@ -29,5 +29,4 @@ private static final Logger logger = LoggerFactory.getLogger(JuntateController.c
         logger.error("An unexpected error occurred: {}", ex.getMessage(), ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred. Please try again later.");
     }
- 
 }
