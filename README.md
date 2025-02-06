@@ -19,6 +19,12 @@ Juntate es una aplicación comunitaria diseñada para conectar personas en Bogot
 
 ## Enlace al Documento de Planeación:
 
+https://trello.com/invite/b/67a42bd46bf51ac7a194dd0f/ATTI680561e25a311def7fd63f69c3ad48a07B083836/my-trello-board
+
+## Estructura del proyecto
+
+![image](https://github.com/user-attachments/assets/e8504b6f-f168-471d-84c6-b3a12d266e93)
+
 ## Instrucciones de despliegue
 
 ### Instalacion y ejecucion
