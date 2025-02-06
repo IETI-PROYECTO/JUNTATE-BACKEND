@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import escuelaing.edu.co.juntate.model.Event;
 import escuelaing.edu.co.juntate.service.JuntateService;
+import escuelaing.edu.co.juntate.service.Exception.JuntateException;
 
 @RestController
 @RequestMapping("/api/events")
@@ -30,8 +31,15 @@ private final JuntateService juntateService;
 
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
-        Event createdEvent = juntateService.createEvent(event);
-        return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
+        Event createdEvent;
+        try {
+            createdEvent = juntateService.createEvent(event);
+            return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
+        } catch (JuntateException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        
     }
 
     @GetMapping("/health")
