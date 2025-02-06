@@ -11,14 +11,13 @@ public class Event {
     private String id;
     private String name;
     private String gameType;
-    private Arena location; // Referencia embebida a Arena
+    private String location; 
     private LocalDateTime creationDate;
     private LocalDateTime expirationDate;
     private int numberOfPlayers;
 
-    // Constructor vacío y con parámetros
     public Event() {}
-    public Event(String name, String gameType, Arena location, LocalDateTime creationDate, LocalDateTime expirationDate, int numberOfPlayers) {
+    public Event(String name, String gameType, String location, LocalDateTime creationDate, LocalDateTime expirationDate, int numberOfPlayers) {
         this.name = name;
         this.gameType = gameType;
         this.location = location;
@@ -26,8 +25,7 @@ public class Event {
         this.expirationDate = expirationDate;
         this.numberOfPlayers = numberOfPlayers;
     }
-
-    // Getters y setters
+    
     public String getId() {
         return id;
     }
@@ -49,10 +47,10 @@ public class Event {
         this.gameType = gameType;
     }
 
-    public Arena getLocation() {
+    public String getLocation() {
         return location;
     }
-    public void setLocation(Arena location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
