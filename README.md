@@ -49,4 +49,8 @@ mvn spring-boot:run
 
 - Camilo Murcia Espinosa
 - Milton Andres Gutierrez Lopez
+- Leonardo Piñeros Cortes
+- Jeisson Casallas Rozo
+- Jhon Sosa Muñoz
+- Oscar Lesmes
   
