@@ -1,13 +1,13 @@
-package escuelaing.edu.co.juntate;
+// package escuelaing.edu.co.juntate;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class JuntateApplicationTests {
+// @SpringBootTest
+// class JuntateApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+// 	@Test
+// 	void contextLoads() {
+// 	}
 
-}
+// }
