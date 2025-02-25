@@ -45,6 +45,10 @@ mvn clean install
 mvn spring-boot:run
 ```
 
+## Test
+
+![](resources/UserTest.PNG)
+
 ## Autores
 
 - Milton Andres Gutierrez Lopez
