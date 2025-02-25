@@ -34,26 +34,31 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void deleteEvent(String id) throws EventException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteEvent'");
+        if(!eventRepository.existsById(id)) {
+            throw new EventException(EventException.EVENT_NOT_FOUND);
+        }
+        eventRepository.deleteById(id);
     }
 
     @Override
     public List<Event> getAllEvents() throws EventException{
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllEvents'");
+        return eventRepository.findAll();
     }
 
     @Override
     public Event getEventById(String id) throws EventException{
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getEventById'");
+        Event event = eventRepository.findById(id).orElse(null);
+        if(event == null) {
+            throw new EventException(EventException.EVENT_NOT_FOUND);
+        }
+        return event;
     }
-
-    @Override
+        
     public Event updateEvent(String id, Event event)throws EventException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateEvent'");
+        if(!eventRepository.existsById(id)) {
+            throw new EventException(EventException.EVENT_NOT_FOUND);
+        }
+        return eventRepository.save(event); 
     }
     
 }
