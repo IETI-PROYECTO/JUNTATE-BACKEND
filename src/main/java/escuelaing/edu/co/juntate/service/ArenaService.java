@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import escuelaing.edu.co.juntate.exception.JuntateException;
+import escuelaing.edu.co.juntate.exception.ArenaException;
 import escuelaing.edu.co.juntate.model.Arena;
 import escuelaing.edu.co.juntate.repository.ArenaRepository;
 
@@ -18,12 +18,12 @@ public class ArenaService {
         this.arenaRepository = arenaRepository;
     }
 
-    public Arena createArena(Arena arena) throws JuntateException {
+    public Arena createArena(Arena arena) throws ArenaException {
         if (arena == null || arena.getNeighborhood() == null || arena.getAddress() == null) {
-            throw new JuntateException(JuntateException.INVALID_REQUEST);
+            throw new ArenaException(ArenaException.INVALID_REQUEST);
         }
         if (arenaRepository.existsById(arena.getId())) {
-            throw new JuntateException(JuntateException.ARENA_ALREADY_EXISTS);
+            throw new ArenaException(ArenaException.ARENA_ALREADY_EXISTS);
         }
         return arenaRepository.save(arena);
     }
@@ -32,30 +32,30 @@ public class ArenaService {
         return arenaRepository.findAll();
     }
 
-    public Arena getArenaById(String id) throws JuntateException {
+    public Arena getArenaById(String id) throws ArenaException {
     try {
         return arenaRepository.findById(id)
-                .orElseThrow(() -> new JuntateException(JuntateException.ARENA_NOT_FOUND));
+                .orElseThrow(() -> new ArenaException(ArenaException.ARENA_NOT_FOUND));
     } catch (Exception e) {
-        throw new JuntateException("Error al obtener la arena: " + e.getMessage());
+        throw new ArenaException("Error al obtener la arena: " + e.getMessage());
     }
 }
 
-    public boolean deleteArena(String id) throws JuntateException {
+    public boolean deleteArena(String id) throws ArenaException{
         if (arenaRepository.existsById(id)) {
             try {
                 arenaRepository.deleteById(id);
                 return true;
             } catch (Exception e) {
-                throw new JuntateException(JuntateException.ARENA_DELETE_EXCEPTION);
+                throw new ArenaException(ArenaException.ARENA_DELETE_EXCEPTION);
             }
         }
-        throw new JuntateException(JuntateException.ARENA_NOT_FOUND);
+        throw new ArenaException(ArenaException.ARENA_NOT_FOUND);
     }
 
-    public Arena updateArena(String id, Arena updatedArena) throws JuntateException {
+    public Arena updateArena(String id, Arena updatedArena) throws ArenaException {
         if (updatedArena == null || updatedArena.getNeighborhood() == null || updatedArena.getAddress() == null) {
-            throw new JuntateException(JuntateException.INCORRECT_DATA);
+            throw new ArenaException(ArenaException.INCORRECT_DATA);
         }
         return arenaRepository.findById(id)
                 .map(existingArena -> {
@@ -66,6 +66,6 @@ public class ArenaService {
                     existingArena.setImages(updatedArena.getImages());
                     return arenaRepository.save(existingArena);
                 })
-                .orElseThrow(() -> new JuntateException(JuntateException.ARENA_NOT_FOUND));
+                .orElseThrow(() -> new ArenaException(ArenaException.ARENA_NOT_FOUND));
     }
 }
