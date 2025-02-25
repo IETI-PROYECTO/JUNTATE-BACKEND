@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import escuelaing.edu.co.juntate.exception.EventException;
-import escuelaing.edu.co.juntate.exception.JuntateException;
 import escuelaing.edu.co.juntate.model.Event;
 import escuelaing.edu.co.juntate.service.event.EventService;
 
