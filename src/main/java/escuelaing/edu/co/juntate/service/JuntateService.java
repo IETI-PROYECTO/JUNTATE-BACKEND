@@ -1,8 +1,8 @@
 package escuelaing.edu.co.juntate.service;
 
+import escuelaing.edu.co.juntate.exception.JuntateException;
 import escuelaing.edu.co.juntate.model.Event;
 import escuelaing.edu.co.juntate.repository.EventRepository;
-import escuelaing.edu.co.juntate.service.Exception.JuntateException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
