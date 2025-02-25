@@ -1,7 +1,7 @@
 package escuelaing.edu.co.juntate;
 
 import escuelaing.edu.co.juntate.controller.ArenaController;
-import escuelaing.edu.co.juntate.exception.JuntateException;
+import escuelaing.edu.co.juntate.exception.ArenaException;
 import escuelaing.edu.co.juntate.model.Arena;
 import escuelaing.edu.co.juntate.service.ArenaService;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +40,7 @@ class ArenaTest {
     }
 
     @Test
-    void testGetArenaById_Success() throws JuntateException {
+    void testGetArenaById_Success() throws ArenaException {
         when(arenaService.getArenaById("1")).thenReturn(arena);
 
         ResponseEntity<Arena> response = arenaController.getArenaById("1");
@@ -51,14 +51,14 @@ class ArenaTest {
     }
 
     @Test
-    void testGetArenaById_NotFound() throws JuntateException {
-        when(arenaService.getArenaById("99")).thenThrow(new JuntateException(JuntateException.ARENA_NOT_FOUND));
+    void testGetArenaById_NotFound() throws ArenaException {
+        when(arenaService.getArenaById("99")).thenThrow(new ArenaException(ArenaException.ARENA_NOT_FOUND));
 
-        JuntateException exception = assertThrows(JuntateException.class, () -> {
+        ArenaException exception = assertThrows(ArenaException.class, () -> {
             arenaController.getArenaById("99");
         });
 
-        assertEquals(JuntateException.ARENA_NOT_FOUND, exception.getMessage());
+        assertEquals(ArenaException.ARENA_NOT_FOUND, exception.getMessage());
     }
 
     @Test
@@ -73,7 +73,7 @@ class ArenaTest {
     }
 
     @Test
-    void testCreateArena_Success() throws JuntateException {
+    void testCreateArena_Success() throws ArenaException {
         when(arenaService.createArena(any(Arena.class))).thenReturn(arena);
 
         ResponseEntity<Arena> response = arenaController.createArena(arena);
@@ -84,19 +84,19 @@ class ArenaTest {
     }
 
     @Test
-    void testCreateArena_Failure() throws JuntateException {
+    void testCreateArena_Failure() throws ArenaException {
         when(arenaService.createArena(any(Arena.class)))
-                .thenThrow(new JuntateException(JuntateException.ARENA_ALREADY_EXISTS));
+                .thenThrow(new ArenaException(ArenaException.ARENA_ALREADY_EXISTS));
 
-        JuntateException exception = assertThrows(JuntateException.class, () -> {
+        ArenaException exception = assertThrows(ArenaException.class, () -> {
             arenaController.createArena(arena);
         });
 
-        assertEquals(JuntateException.ARENA_ALREADY_EXISTS, exception.getMessage());
+        assertEquals(ArenaException.ARENA_ALREADY_EXISTS, exception.getMessage());
     }
 
     @Test
-void testUpdateArena_Success() throws JuntateException {
+void testUpdateArena_Success() throws ArenaException {
     Arena originalArena = new Arena();
     originalArena.setId("1");
     originalArena.setNeighborhood("Centro");
@@ -114,22 +114,22 @@ void testUpdateArena_Success() throws JuntateException {
 }
 
 @Test
-void testUpdateArena_NotFound() throws JuntateException {
+void testUpdateArena_NotFound() throws ArenaException {
     Arena updatedArena = new Arena();
     updatedArena.setId("99");
     updatedArena.setNeighborhood("Sur");
     updatedArena.setAddress("Carrera 50 #30-20");
     when(arenaService.updateArena(eq("99"), any(Arena.class)))
-            .thenThrow(new JuntateException(JuntateException.ARENA_NOT_FOUND));
-    JuntateException exception = assertThrows(JuntateException.class, () -> {
+            .thenThrow(new ArenaException(ArenaException.ARENA_NOT_FOUND));
+    ArenaException exception = assertThrows(ArenaException.class, () -> {
         arenaController.updateArena("99", updatedArena);
     });
-    assertEquals(JuntateException.ARENA_NOT_FOUND, exception.getMessage());
+    assertEquals(ArenaException.ARENA_NOT_FOUND, exception.getMessage());
 }
 
 
     @Test
-    void testDeleteArena_Success() throws JuntateException {
+    void testDeleteArena_Success() throws ArenaException {
         when(arenaService.deleteArena("1")).thenReturn(true);
 
         ResponseEntity<Void> response = arenaController.deleteArena("1");
@@ -138,14 +138,14 @@ void testUpdateArena_NotFound() throws JuntateException {
     }
 
     @Test
-    void testDeleteArena_NotFound() throws JuntateException {
+    void testDeleteArena_NotFound() throws ArenaException {
         when(arenaService.deleteArena("99"))
-                .thenThrow(new JuntateException(JuntateException.ARENA_NOT_FOUND));
+                .thenThrow(new ArenaException(ArenaException.ARENA_NOT_FOUND));
 
-        JuntateException exception = assertThrows(JuntateException.class, () -> {
+        ArenaException exception = assertThrows(ArenaException.class, () -> {
             arenaController.deleteArena("99");
         });
 
-        assertEquals(JuntateException.ARENA_NOT_FOUND, exception.getMessage());
+        assertEquals(ArenaException.ARENA_NOT_FOUND, exception.getMessage());
     }
 }

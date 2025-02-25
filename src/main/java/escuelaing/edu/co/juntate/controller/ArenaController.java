@@ -1,5 +1,6 @@
 package escuelaing.edu.co.juntate.controller;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import escuelaing.edu.co.juntate.service.ArenaService;
-import escuelaing.edu.co.juntate.exception.JuntateException;
+import escuelaing.edu.co.juntate.exception.ArenaException;
 import escuelaing.edu.co.juntate.model.Arena;
 import escuelaing.edu.co.juntate.model.Event;
 
@@ -30,7 +31,7 @@ public class ArenaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Arena> getArenaById(@PathVariable String id) throws JuntateException {
+    public ResponseEntity<Arena> getArenaById(@PathVariable String id) throws ArenaException {
         Arena arena = arenaService.getArenaById(id);
         return ResponseEntity.ok(arena);
     }
@@ -42,13 +43,13 @@ public class ArenaController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Arena> createArena(@RequestBody Arena arena) throws JuntateException {
+    public ResponseEntity<Arena> createArena(@RequestBody Arena arena) throws ArenaException {
         Arena arenaCreated = arenaService.createArena(arena);
         return ResponseEntity.status(201).body(arenaCreated);
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<Arena> updateArena(@PathVariable String id, @RequestBody Arena arena) throws JuntateException {
+    public ResponseEntity<Arena> updateArena(@PathVariable String id, @RequestBody Arena arena) throws ArenaException {
         try {
             Arena updatedArena = arenaService.updateArena(id, arena);
             return ResponseEntity.ok(updatedArena);
@@ -58,12 +59,9 @@ public class ArenaController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteArena(@PathVariable String id) throws JuntateException {
+    public ResponseEntity<Void> deleteArena(@PathVariable String id) throws ArenaException {
         boolean deleted = arenaService.deleteArena(id);
         return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
-
-    
-
 
 }
