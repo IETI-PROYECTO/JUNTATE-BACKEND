@@ -47,6 +47,10 @@ mvn spring-boot:run
 
 ## Autores
 
-- Camilo Murcia Espinosa
 - Milton Andres Gutierrez Lopez
+- Leonardo Piñeros Cortes
+- Camilo Murcia Espinosa
+- Jeisson Casallas Rozo
+- Jhon Sosa Muñoz
+- Oscar Lesmes
   

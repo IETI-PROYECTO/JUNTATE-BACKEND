@@ -1,27 +1,27 @@
 package escuelaing.edu.co.juntate.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.util.List;
 
 @Document(collection = "arenas")
 public class Arena {
 
     @Id
     private String id;
-    private double latitude;
-    private double longitude;
     private String neighborhood;
+    private String address;
     private String image;
     private List<String> sportsTypes;
     private List<String> images;
 
+
     public Arena() {}
 
-    public Arena(double latitude, double longitude, String neighborhood, String image, List<String> sportsTypes, List<String> images) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public Arena(String neighborhood,String address, String image, List<String> sportsTypes, List<String> images) {
         this.neighborhood = neighborhood;
+        this.address = address;
         this.image = image;
         this.sportsTypes = sportsTypes;
         this.images = images;
@@ -33,22 +33,6 @@ public class Arena {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
     }
 
     public String getNeighborhood() {
@@ -81,5 +65,13 @@ public class Arena {
 
     public void setImages(List<String> images) {
         this.images = images;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
