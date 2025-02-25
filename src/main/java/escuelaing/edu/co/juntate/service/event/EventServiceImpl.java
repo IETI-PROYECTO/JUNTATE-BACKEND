@@ -54,6 +54,7 @@ public class EventServiceImpl implements EventService {
         return event;
     }
         
+    @Override
     public Event updateEvent(String id, Event event)throws EventException {
         if(!eventRepository.existsById(id)) {
             throw new EventException(EventException.EVENT_NOT_FOUND);
