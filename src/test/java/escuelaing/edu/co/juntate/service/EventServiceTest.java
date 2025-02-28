@@ -137,25 +137,38 @@ class EventServiceTest {
         verify(eventRepository, times(1)).findById("1");
     }
 
+
+
     @Test
-    void testUpdateEvent_Success() throws EventException {
-        when(eventRepository.existsById("1")).thenReturn(true);
-        when(eventRepository.save(sampleEvent)).thenReturn(sampleEvent);
+    void updateEvent_WhenEventExists_ShouldUpdateAndReturnEvent() throws EventException {
+        Event updatedEvent = new Event();
+        updatedEvent.setName("New FIFA Tournament");
+        updatedEvent.setGameType("Sports");
+        updatedEvent.setNumberOfPlayers(8);
 
-        Event result = eventService.updateEvent("1", sampleEvent);
-
+        when(eventRepository.findById("1")).thenReturn(Optional.of(sampleEvent));
+        when(eventRepository.save(any(Event.class))).thenReturn(updatedEvent);
+        
+        Event result = eventService.updateEvent("1", updatedEvent);
+        
         assertNotNull(result);
-        assertEquals("FIFA Tournament", result.getName());
-        verify(eventRepository, times(1)).save(sampleEvent);
+        assertEquals("New FIFA Tournament", result.getName());
+        assertEquals(8, result.getNumberOfPlayers());
+        verify(eventRepository, times(1)).findById("1");
+        verify(eventRepository, times(1)).save(any(Event.class));
     }
 
     @Test
-    void testUpdateEvent_NotFound() {
-        when(eventRepository.existsById("1")).thenReturn(false);
+    void updateEvent_WhenEventDoesNotExist_ShouldThrowEventException() {
+        Event updatedEvent = new Event();
+        updatedEvent.setName("New FIFA Tournament");
 
-        EventException exception = assertThrows(EventException.class, () -> eventService.updateEvent("1", sampleEvent));
-
+        when(eventRepository.findById("1")).thenReturn(Optional.empty());
+        
+        EventException exception = assertThrows(EventException.class, () -> eventService.updateEvent("1", updatedEvent));
         assertEquals(EventException.EVENT_NOT_FOUND, exception.getMessage());
-        verify(eventRepository, never()).save(any(Event.class));
+        verify(eventRepository, times(1)).findById("1");
     }
+
+
 }

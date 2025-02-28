@@ -56,10 +56,13 @@ public class EventServiceImpl implements EventService {
         
     @Override
     public Event updateEvent(String id, Event event)throws EventException {
-        if(!eventRepository.existsById(id)) {
-            throw new EventException(EventException.EVENT_NOT_FOUND);
-        }
-        return eventRepository.save(event); 
+        Event eventInDB = getEventById(id);
+        eventInDB.setName(event.getName());
+        eventInDB.setGameType(event.getGameType());
+        eventInDB.setNumberOfPlayers(event.getNumberOfPlayers());
+        eventInDB.setLocation(event.getLocation());
+        eventInDB.setExpirationDate(event.getExpirationDate());
+        return eventRepository.save(eventInDB); 
     }
     
 }
