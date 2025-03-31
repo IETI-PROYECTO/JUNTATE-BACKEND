@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import escuelaing.edu.co.juntate.model.AuthenticationRequest;
 import escuelaing.edu.co.juntate.model.AuthenticationResponse;
 import escuelaing.edu.co.juntate.model.RegisterRequest;
+import escuelaing.edu.co.juntate.model.Role;
 import escuelaing.edu.co.juntate.model.User;
 import escuelaing.edu.co.juntate.repository.UserRepository;
 import escuelaing.edu.co.juntate.security.JwtService;
@@ -27,7 +28,7 @@ public class AuthenticationService {
         user.setName(request.getFirstName() + " " + request.getLastName());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        // Los campos phone, city y photo se pueden establecer más tarde
+        user.setRole(Role.USER);
 
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);

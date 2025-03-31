@@ -20,9 +20,11 @@ public class User implements UserDetails {
     private int phone;
     private String city;
     private String photo;
+    private Role role;
 
     public User() {
         this.id = UUID.randomUUID().toString();
+        this.role = Role.USER; // Rol por defecto
     }
 
     public User(String id, String name, String email, String password, int phone, String city, String photo) {
@@ -33,6 +35,7 @@ public class User implements UserDetails {
         this.phone = phone;
         this.city = city;
         this.photo = photo;
+        this.role = Role.USER; // Rol por defecto
     }
 
     public String getId() { return id; }
@@ -56,9 +59,12 @@ public class User implements UserDetails {
     public String getPhoto() { return photo; }
     public void setPhoto(String photo) { this.photo = photo; }
 
+    public Role getRole() { return role; }
+    public void setRole(Role role) { this.role = role; }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("USER"));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
 
     @Override

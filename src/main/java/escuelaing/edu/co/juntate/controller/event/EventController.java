@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import escuelaing.edu.co.juntate.exception.EventException;
 import escuelaing.edu.co.juntate.model.Event;
@@ -24,6 +25,7 @@ import escuelaing.edu.co.juntate.service.event.EventService;
 
 @Controller
 @RequestMapping("/api/event")
+@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 public class EventController {
 
 

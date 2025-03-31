@@ -14,6 +14,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import escuelaing.edu.co.juntate.model.User;
+import escuelaing.edu.co.juntate.model.Role;
 
 @Service
 public class JwtService {
@@ -27,13 +29,22 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
+    public Role extractRole(String token) {
+        return Role.valueOf(extractClaim(token, claims -> claims.get("role", String.class)));
+    }
+
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        Map<String, Object> claims = new HashMap<>();
+        if (userDetails instanceof User) {
+            User user = (User) userDetails;
+            claims.put("role", user.getRole().name());
+        }
+        return generateToken(claims, userDetails);
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
@@ -49,7 +60,12 @@ public class JwtService {
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+        final Role tokenRole = extractRole(token);
+        final Role userRole = ((User) userDetails).getRole();
+        
+        return (username.equals(userDetails.getUsername())) 
+            && !isTokenExpired(token)
+            && tokenRole.equals(userRole);
     }
 
     private boolean isTokenExpired(String token) {
