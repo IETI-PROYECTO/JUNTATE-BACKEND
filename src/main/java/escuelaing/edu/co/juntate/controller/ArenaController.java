@@ -2,8 +2,6 @@ package escuelaing.edu.co.juntate.controller;
 
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,14 +11,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 
 import escuelaing.edu.co.juntate.service.ArenaService;
 import escuelaing.edu.co.juntate.exception.ArenaException;
 import escuelaing.edu.co.juntate.model.Arena;
-import escuelaing.edu.co.juntate.model.Event;
 
 @RestController
 @RequestMapping("/api/arenas")
+@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 public class ArenaController {
     
     private final ArenaService arenaService;
