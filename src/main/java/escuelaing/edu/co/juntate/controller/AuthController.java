@@ -1,10 +1,7 @@
 package escuelaing.edu.co.juntate.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import escuelaing.edu.co.juntate.model.AuthenticationRequest;
 import escuelaing.edu.co.juntate.model.AuthenticationResponse;
@@ -15,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class AuthController {
 
     private final AuthenticationService authenticationService;
@@ -32,4 +30,4 @@ public class AuthController {
     ) {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
-} 
+}
