@@ -2,7 +2,7 @@ package escuelaing.edu.co.juntate.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Document(collection = "events")
 public class Event {
@@ -12,12 +12,13 @@ public class Event {
     private String name;
     private String gameType;
     private String location; 
-    private LocalDateTime creationDate;
-    private LocalDateTime expirationDate;
+    private Date creationDate;
+    private Date expirationDate;
     private int numberOfPlayers;
 
     public Event() {}
-    public Event(String name, String gameType, String location, LocalDateTime creationDate, LocalDateTime expirationDate, int numberOfPlayers) {
+
+    public Event(String name, String gameType, String location, Date creationDate, Date expirationDate, int numberOfPlayers) {
         this.name = name;
         this.gameType = gameType;
         this.location = location;
@@ -25,7 +26,7 @@ public class Event {
         this.expirationDate = expirationDate;
         this.numberOfPlayers = numberOfPlayers;
     }
-    
+
     public String getId() {
         return id;
     }
@@ -54,17 +55,17 @@ public class Event {
         this.location = location;
     }
 
-    public LocalDateTime getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
-    public void setCreationDate(LocalDateTime creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
-    public LocalDateTime getExpirationDate() {
+    public Date getExpirationDate() {
         return expirationDate;
     }
-    public void setExpirationDate(LocalDateTime expirationDate) {
+    public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
     }
 
