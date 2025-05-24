@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +23,11 @@ import escuelaing.edu.co.juntate.exception.EventException;
 import escuelaing.edu.co.juntate.model.Event;
 import escuelaing.edu.co.juntate.service.event.EventService;
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @Controller
 @RequestMapping("/api/event")
 @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+
 public class EventController {
 
 

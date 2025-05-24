@@ -49,4 +49,12 @@ public class UserService {
         User user = getUserById(id);
         userRepository.delete(user);
     }
+
+   
+
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con email: " + email));
+    }
+
 }

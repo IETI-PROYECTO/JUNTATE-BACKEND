@@ -14,9 +14,11 @@ import java.util.Map;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 
+
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/users")
-@PreAuthorize("hasRole('ADMIN')")
+
 public class UserController {
 
     private final UserService userService;
@@ -25,8 +27,9 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
+    
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
@@ -65,6 +68,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteUser(@PathVariable String id) {
         try {
             userService.deleteUser(id);
@@ -74,4 +78,20 @@ public class UserController {
                     .body(Map.of("error", e.getMessage()));
         }
     }
+
+    // Dentro de AuthController
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @GetMapping("/user/{email}")
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
+        try {
+            User user = userService.getUserByEmail(email);
+            return ResponseEntity.ok(user);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+
+
+
 }
